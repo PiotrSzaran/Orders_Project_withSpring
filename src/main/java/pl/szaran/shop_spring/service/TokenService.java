@@ -40,4 +40,48 @@ public class TokenService {
 
         return tokenRepository.save(token);
     }
+
+    public Long validateToken(String token) {
+
+        if (token == null) {
+            throw new MyException(ExceptionCode.SERVICE, "TOKEN SERVICE: validateToken() - token is null");
+        }
+
+        var tokenWithUserID = tokenRepository
+                .findByToken(token)
+                .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "TOKEN SERVICE: validateToken() - token is incorrect"));
+
+        if (tokenWithUserID.getExpirationDateTime().isBefore(LocalDateTime.now())) {
+            tokenRepository.delete(tokenWithUserID); //usuwam token po upływie ważności tokena
+            throw new MyException(ExceptionCode.SERVICE, "TOKEN SERVICE: validateToken() - token has been expired");
+        }
+
+        return tokenWithUserID.getUser().getId();
+    }
+
+    public void deleteToken(String token) {
+
+        if (token == null) {
+            throw new MyException(ExceptionCode.SERVICE, "TOKEN SERVICE: deleteToken() - token is null");
+        }
+
+        var tokenWithUserID = tokenRepository
+                .findByToken(token)
+                .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "TOKEN SERVICE: deleteToken() - token is incorrect"));
+
+        tokenRepository.delete(tokenWithUserID);
+    }
+
+    public Long activateUser(String token) {
+
+        var userID = validateToken(token);
+        var user = userRepository.findById(userID).orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "TOKEN SERVICE: activateUser() - error when finding user by id"));
+        user.setEnabled(true);
+        System.out.println("Aktywowano użytkownika " + user.getUsername());
+        deleteToken(token); //usuwam token po udanej aktywacji uzytkownika
+        System.out.println("Usunięto token aktywacyjny dla " + user.getEmail());
+        return userRepository
+                .save(user)
+                .getId();
+    }
 }
