@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Login Page</title>
+</head>
+<body>
+<!--Menu-->
+<div th:insert="fragments/header :: header"></div>
+<br><br>
+
+
+<!--FORMULARZ LOGOWANIA-->
+<div sec:authorize="!isAuthenticated()">
+
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-8 offset-2">
+                <form th:action="@{/app-login}" method="post">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input id="username" name="username" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input id="password" name="password" type="password" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-danger mr-3" type="reset">Clear</button>
+                        <button class="btn btn-success mr-3" type="submit">LogIn</button>
+                    </div>
+                    <div class="form-group">
+                        <a href="/security/resetPassword" class="btn btn-primary">Forgot password</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

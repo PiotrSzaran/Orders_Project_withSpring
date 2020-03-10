@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new Account - Patient</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--Menu-->
+<div th:insert="fragments/header :: header"></div>
+<br><br>
+
+<!--FORMULARZ REJESTRACYJNY-->
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-8 offset-2">
+            <h3>Register your account for free</h3>
+            <form th:action="@{/security/register}" method="post" th:object="${user}"
+                  enctype="multipart/form-data" novalidate>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="username">User name</label>
+                            <input id="username" type="text" class="form-control" th:field="*{username}"/>
+                            <small id="usernameHelp" class="form-text text-muted">This will be required to login on our
+                                website</small>
+                            <div th:if="${errors.containsKey('username')}">
+                                <p class="text-danger" th:text="${errors.get('username')}"></p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="email">Email</label>
+                            <input id="email" type="email" class="form-control" th:field="*{email}"/>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
+                            <div th:if="${errors.containsKey('email')}">
+                                <p class="text-danger" th:text="${errors.get('email')}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="password">Password</label>
+                            <input id="password" type="password" class="form-control" th:field="*{password}"/>
+                            <small id="passwordHelp" class="form-text text-muted">Password must have at least 8
+                                chars</small>
+                            <div th:if="${errors.containsKey('password')}">
+                                <p class="text-danger" th:text="${errors.get('password')}"></p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="passwordConfirmation">Repeat password</label>
+                            <input id="passwordConfirmation" type="password" class="form-control"
+                                   th:field="*{passwordConfirmation}"/>
+                            <!--small id="passwordConfirmationHelp" class="form-text text-muted"></small-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input id="role" type="hidden" class="form-control" th:field="*{role}"/>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success mr-1" type="submit">Create free account</button>
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>
