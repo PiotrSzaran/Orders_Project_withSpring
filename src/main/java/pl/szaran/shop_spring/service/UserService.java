@@ -31,5 +31,13 @@ public class UserService {
                 .map(ModelMapper::fromUserToUserDTO)
                 .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "USER SERVICE, findByUsername() - NO USER WITH USERNAME: " + username));
     }
+
+    public boolean doesEmailExists(String email) {
+        if (email == null) {
+            throw new MyException(ExceptionCode.SERVICE, "USER SERVICE, doesEmailExists - email is null");
+        }
+
+        return userRepository.findByEmail(email).isPresent();
+    }
 }
 
