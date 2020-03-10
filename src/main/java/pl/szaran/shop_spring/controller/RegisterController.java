@@ -61,7 +61,7 @@ public class RegisterController {
             return "/security/register";
         }
 
-        //userService.add(userDTO); //todo dorobić metodę, która wysle do usera mail z linkiem aktywacyjnym (token)
+        userService.add(userDTO);
 
         return "redirect:/";
     }
