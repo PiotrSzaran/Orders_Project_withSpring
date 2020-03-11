@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Orders project - Add new category</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-8 offset-2">
+            <h3>Add new category</h3>
+            <form th:action="@{/admin/addCategory}" method="post" th:object="${category}">
+
+                <div class="form-group">
+                    <div class="col">
+                        <label for="username">Name</label>
+                        <input id="username" type="text" class="form-control" th:field="*{name}"/>
+                        <small id="usernameHelp" class="form-text text-muted">Type name of category</small>
+                        <div th:if="${errors.containsKey('name')}">
+                            <p class="text-danger" th:text="${errors.get('name')}"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success mr-1" type="submit">Add category</button>
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>
