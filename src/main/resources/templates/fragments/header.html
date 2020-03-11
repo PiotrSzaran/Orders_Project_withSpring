@@ -28,9 +28,9 @@
             <span sec:authorize="!isAuthenticated()" class="icon-bar"><a href="/security/register"
                                                                          class="btn btn-success">Create free account</a></span>
             <span sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a href="/admin/index" class="btn btn-success">Admin stuff</a></span>
-            <span sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a href="/admin/addCategory" class="btn btn-success">Add category</a></span>
+                <a href="/admin/index" class="btn btn-success">Admin stuff</a>
+                <a href="/admin/addCategory" class="btn btn-success">Add category</a>
+                <a href="/admin/addCountry" class="btn btn-success">Add country</a></span>
             <span sec:authorize="hasRole('ROLE_USER')">
                     <a href="/index" class="btn btn-success">User stuff</a></span>
 

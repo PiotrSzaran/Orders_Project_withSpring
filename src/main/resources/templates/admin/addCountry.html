@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Orders project - Add new category</title>
+    <title>Orders project - Add new country</title>
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -16,14 +16,14 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-8 offset-2">
-            <h3>Add new category</h3>
-            <form th:action="@{/admin/addCategory}" method="post" th:object="${category}">
+            <h3>Add new country</h3>
+            <form th:action="@{/admin/addCountry}" method="post" th:object="${country}">
 
                 <div class="form-group">
                     <div class="col">
                         <label for="name">Name</label>
                         <input id="name" type="text" class="form-control" th:field="*{name}"/>
-                        <small id="nameHelp" class="form-text text-muted">Type name of category</small>
+                        <small id="nameHelp" class="form-text text-muted">Type name of country</small>
                         <div th:if="${errors.containsKey('name')}">
                             <p class="text-danger" th:text="${errors.get('name')}"></p>
                         </div>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-success mr-1" type="submit">Add category</button>
+                    <button class="btn btn-success mr-1" type="submit">Add country</button>
                     <button class="btn btn-primary" type="reset">Reset</button>
                 </div>
             </form>
