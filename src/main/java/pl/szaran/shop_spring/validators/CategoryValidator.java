@@ -5,10 +5,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import pl.szaran.shop_spring.model.dto.CategoryDTO;
+import pl.szaran.shop_spring.repository.CategoryRepository;
+import pl.szaran.shop_spring.service.CategoryService;
 
 @Component
 @RequiredArgsConstructor
 public class CategoryValidator implements Validator {
+
+    private final CategoryRepository categoryRepository;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -26,6 +30,10 @@ public class CategoryValidator implements Validator {
 
         if (categoryDTO.getName() != null && !categoryDTO.getName().matches("[A-Z\\s]+")) {
             errors.rejectValue("category", "name is incorrect: " + categoryDTO.getName());
+        }
+
+        if (categoryRepository.findByName(categoryDTO.getName()).isPresent()) {
+            errors.rejectValue("name", "category already exists");
         }
     }
 }
