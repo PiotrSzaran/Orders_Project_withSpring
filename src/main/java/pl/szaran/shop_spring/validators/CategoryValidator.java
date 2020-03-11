@@ -6,7 +6,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import pl.szaran.shop_spring.model.dto.CategoryDTO;
 import pl.szaran.shop_spring.repository.CategoryRepository;
-import pl.szaran.shop_spring.service.CategoryService;
 
 @Component
 @RequiredArgsConstructor
