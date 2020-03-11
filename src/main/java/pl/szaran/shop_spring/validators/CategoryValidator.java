@@ -24,11 +24,11 @@ public class CategoryValidator implements Validator {
         CategoryDTO categoryDTO = (CategoryDTO) o;
 
         if (categoryDTO.getName() != null && categoryDTO.getName().isEmpty()) {
-            errors.rejectValue("category", "category name is empty");
+            errors.rejectValue("name", "category name is empty");
         }
 
         if (categoryDTO.getName() != null && !categoryDTO.getName().matches("[A-Z\\s]+")) {
-            errors.rejectValue("category", "name is incorrect: " + categoryDTO.getName());
+            errors.rejectValue("name", "should be uppercase");
         }
 
         if (categoryRepository.findByName(categoryDTO.getName()).isPresent()) {
