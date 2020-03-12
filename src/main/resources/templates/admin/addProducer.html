@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders project - Add new producer</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-8 offset-2">
+            <h3>Add new producer</h3>
+            <form th:action="@{/admin/addProducer}" method="post" th:object="${producer}">
+
+                <div class="form-group">
+                    <div class="row">
+                    <div class="col">
+                        <label for="name">Name</label>
+                        <input id="name" type="text" class="form-control" th:field="*{name}"/>
+                        <small id="nameHelp" class="form-text text-muted">Type name of producer</small>
+                        <div th:if="${errors.containsKey('name')}">
+                            <p class="text-danger" th:text="${errors.get('name')}"></p>
+                        </div>
+                    </div>
+                        <div class="col">
+                            <label for="countryName">Country name</label>
+                            <input id="countryName" type="text" class="form-control" th:field="*{countryDTO.name}"/>
+                            <small id="countryNameHelp" class="form-text text-muted">Type name of country</small>
+                            <div th:if="${errors.containsKey('countryDTO.name')}">
+                                <p class="text-danger" th:text="${errors.get('countryDTO.name')}"></p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="tradeName">Trade Name</label>
+                            <input id="tradeName" type="text" class="form-control" th:field="*{tradeDTO.name}"/>
+                            <small id="tradeNameHelp" class="form-text text-muted">Type name of trade</small>
+                            <div th:if="${errors.containsKey('tradeDTO.name')}">
+                                <p class="text-danger" th:text="${errors.get('tradeDTO.name')}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div th:if="${errors.containsKey('id')}">
+                        <p class="text-danger" th:text="${errors.get('id')}"></p>
+                    </div>
+                    <button class="btn btn-success mr-1" type="submit">Add producer</button>
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>
