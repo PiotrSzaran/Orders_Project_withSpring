@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders project - Add new customer</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-8 offset-2">
+            <h3>Add new customer</h3>
+            <form th:action="@{/admin/addCustomer}" method="post" th:object="${customer}">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="name">Name</label>
+                            <input id="name" type="text" class="form-control" th:field="*{name}"/>
+                            <small id="nameHelp" class="form-text text-muted">Customer's name</small>
+                            <div th:if="${errors.containsKey('name')}">
+                                <p class="text-danger" th:text="${errors.get('name')}"></p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="surname">Surname</label>
+                            <input id="surname" type="text" class="form-control" th:field="*{surname}"/>
+                            <small id="surnameHelp" class="form-text text-muted">Customer's surname</small>
+                            <div th:if="${errors.containsKey('surname')}">
+                                <p class="text-danger" th:text="${errors.get('surname')}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="age">Age</label>
+                            <input id="age" type="number" class="form-control" th:field="*{age}"/>
+                            <small id="ageHelp" class="form-text text-muted">Customer's age</small>
+                            <div th:if="${errors.containsKey('age')}">
+                                <p class="text-danger" th:text="${errors.get('age')}"></p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="countryName">Country</label>
+                            <input id="countryName" type="text" class="form-control" th:field="*{countryDTO.name}"/>
+                            <small id="countryNameHelp" class="form-text text-muted">Customer's country</small>
+                            <div th:if="${errors.containsKey('countryDTO.name')}">
+                                <p class="text-danger" th:text="${errors.get('countryDTO.name')}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div th:if="${errors.containsKey('id')}">
+                        <p class="text-danger" th:text="${errors.get('id')}"></p>
+                    </div>
+                    <button class="btn btn-success mr-1" type="submit">Add customer</button>
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>
